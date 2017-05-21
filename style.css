@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+body {
+  font-family: 'open sans', sans-serif;
+}
+
+
+.header-box {
+  background-color: #E5F3F2;
+  text-align: center;
+  height: 40vh;
+  padding: 10px;
+}
+
+input, .search {
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+  width: 35%;
+  height: 25px;
+  outline: none;
+}
+
+span {
+  color: #00A79D;
+}
+
+h1 {
+  color: #6D6E71;
+  margin-bottom: 20px;
+  margin: 20px 0px;
+  font-size: 50px;
+  font-family: 'roboto slab', serif;
+}
+.save {
+  color: #FFFFFF;
+  background-color: #00A79D;
+  outline: none;
+  border: none;
+  width: 35%;
+  height: 30px;
+}
+
+.save:hover {
+  background-color: #045E55;
+}
+
+.search {
+  margin: 20px auto;
+}
+
+
+h3{
+  font-family: 'roboto slab', serif;
+  color: #6D6E71;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#body-text {
+  color: #939598;
+}
+
+#quality {
+  color: #6D6E71;
+    margin: 15px 15px 20px 0px;
+    line-height: 16px;
+}
+
+#quality img {
+  vertical-align: top;
+  margin-right: 15px;
+}
+
+img {
+  width: 20px;
+}
+
+.delete-btn {
+  float: right;
+}
+
+.delete-btn:hover {
+  content: url(images/delete-hover.svg) no-repeat;
+}
+
+.idea-card {
+  width: 35%;
+  margin: auto;
+}
