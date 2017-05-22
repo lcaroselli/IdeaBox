@@ -42,6 +42,7 @@ h1 {
   border: none;
   width: 35%;
   height: 30px;
+  cursor: pointer;
 }
 
 .save:hover {
