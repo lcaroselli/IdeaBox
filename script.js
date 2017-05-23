@@ -2,7 +2,7 @@
 var ideaCopy = $('.body'); //body input
 var ideaHeader = $('.title'); //header input
 var saveBtn = $('.save'); //save button
-var ideaList = $('.card-box'); //section holding our idea cards
+var ideaList = $('.card-box'); //section holding our ideas
 var ideaDiv = $('.idea-card'); //article area for card info
 
 var ideaArray =[]; //our empty array to hold our idea objects
@@ -44,8 +44,8 @@ var ideaArray =[]; //our empty array to hold our idea objects
 		var ideaCard = new newIdea(ideaHeader.val(), ideaCopy.val());
 
 	  //Save array items to local storage
-	  	// var ideasJson = JSON.stringify(ideaArray);
-	  	// localStorage.setItem('ideas', ideasJson);
+	  var ideasJson = JSON.stringify(ideaArray);
+	  localStorage.setItem('ideas', ideasJson);
 
 	  var ideaToPrepend = newIdea(ideaCard);
 		ideaArray.push(ideaCard);
@@ -53,6 +53,6 @@ var ideaArray =[]; //our empty array to hold our idea objects
 	}
 
 
-
 //Events
 $('.save').on('click', saveIdeaCard);
+$('.delete-btn .delete-btn:hover').on('click', console.log('nice'));
