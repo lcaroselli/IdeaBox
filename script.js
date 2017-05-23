@@ -1,35 +1,58 @@
 //Global Variables
-var ideaCopy = $('.body');
-var ideaHeader = $('.title');
-var ideaList = $('.card-box');
-var ideaArray =[];
-var ideaDiv = $('.idea-card');
+var ideaCopy = $('.body'); //body input
+var ideaHeader = $('.title'); //header input
+var saveBtn = $('.save'); //save button
+var ideaList = $('.card-box'); //section holding our idea cards
+var ideaDiv = $('.idea-card'); //article area for card info
+
+var ideaArray =[]; //our empty array to hold our idea objects
+
 
 
 //Functions
 //Constructor Function
 	function newIdea(title, body) {
-		this.id=Math.floor(Math.random() * 999999);
 		this.title=title;
 		this.body=body;
-		// this.quality=quality;
+		this.id=Math.floor(Math.random() * 999999);
 	}
 
 
+	function ideaCardOutput (newIdeaObject) {
+		var newArticle = document.createElement('article');
+  		newArticle.innerHTML =
+				`<h3> ${newIdeaObject.title} </h3>
+	  		<img class="delete-btn" height="20px" width="20px">
+	  		<p class="body-text"> ${newIdeaObject.body}</p>
+	  		<img class="upvote-btn" height="20px" width="20px">
+	  		<img class="downvote-btn" height="20px" width="20px">
+	  		<p id="quality">quality: <span class="quality-rating"> ${newIdeaObject.quality} </span></p>
+	  		<hr>`;
+
+  		return newArticle;
+
+		addClassStyling('p', "body-text");
+}
+
+
+	function addClassStyling (element, className) {
+		$('element').addClass("className");
+	}
+
+
+	function saveIdeaCard() {
+		var ideaCard = new newIdea(ideaHeader.val(), ideaCopy.val());
+
+	  //Save array items to local storage
+	  	// var ideasJson = JSON.stringify(ideaArray);
+	  	// localStorage.setItem('ideas', ideasJson);
+
+	  var ideaToPrepend = newIdea(ideaCard);
+		ideaArray.push(ideaCard);
+	  ideaDiv.prepend(ideaCardOutput(ideaCard));
+	}
+
+
+
 //Events
-$('.save').on('click', function(){
-  var ideaCard = new newIdea(ideaHeader.val(), ideaCopy.val());
-
-  var ideaHeaderNode = `<h3> ${ideaCard.title} </h3>`
-	var deleteBtnNode = `<img src="images/delete.svg" class="delete-btn" alt="Delete Button">`
-  var ideaCopyNode = `<p> ${ideaCard.body} </p>`
-	// var ideaQualityNode = `<p> ${ideaCard.quality} </p>`
-	var ideaHrNode = `<hr>`
-
-	$(function(){
-		$("p:first").addClass("body-text");
-	});
-
-  ideaDiv.prepend(ideaHeaderNode, deleteBtnNode, ideaCopyNode, /*ideaQualityNode,*/ ideaHrNode);
-  ideaArray.push(ideaCard);
-})
+$('.save').on('click', saveIdeaCard);

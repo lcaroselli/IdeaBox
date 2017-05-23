@@ -8,20 +8,13 @@ body {
 }
 
 
+
+/* Main Layout Controls */
 .header-box {
   background-color: #E5F3F2;
-  text-align: center;
   height: 40vh;
   padding: 10px;
-}
-
-input, .search {
-  display: block;
-  margin: auto;
-  margin-bottom: 10px;
-  width: 35%;
-  height: 25px;
-  outline: none;
+  text-align: center;
 }
 
 span {
@@ -30,19 +23,77 @@ span {
 
 h1 {
   color: #6D6E71;
-  margin-bottom: 20px;
-  margin: 20px 0px;
-  font-size: 50px;
   font-family: 'roboto slab', serif;
+  font-size: 50px;
+  margin: 20px 0px;
+  margin-bottom: 20px;
 }
-.save {
-  color: #FFFFFF;
-  background-color: #00A79D;
+
+h3{
+  font-family: 'roboto slab', serif;
+  color: #6D6E71;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+
+/* Button Controls */
+.delete-btn {
+  background-image: url('images/delete.svg');
+  float: right;
+}
+
+.delete-btn:hover {
+  background-image: url('images/delete-hover.svg');
+}
+
+.downvote-btn {
+  background-image: url('images/downvote.svg');
+}
+
+.downvote-btn:hover {
+  background-image: url('images/downvote-hover.svg');
+}
+
+.upvote-btn {
+  background-image: url('images/upvote.svg');
+}
+
+.upvote-btn:hover {
+  background-image: url('images/upvote-hover.svg');
+}
+
+.upvote-btn, .downvote-btn, .delete-btn {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.quality-rating {
+
+}
+
+
+
+/* Input Controls */
+input, .search {
+  display: block;
+  height: 25px;
+  margin: auto;
+  margin-bottom: 10px;
   outline: none;
-  border: none;
   width: 35%;
-  height: 30px;
+}
+
+.save {
+  background-color: #00A79D;
+  border: none;
+  color: #FFFFFF;
   cursor: pointer;
+  height: 30px;
+  outline: none;
+  width: 35%;
 }
 
 .save:hover {
@@ -54,42 +105,31 @@ h1 {
 }
 
 
-h3{
-  font-family: 'roboto slab', serif;
-  color: #6D6E71;
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 20px;
-}
 
+/* JavaScript Node - Toggle Classes */
 .body-text {
   color: #939598;
-}
-
-#quality {
-  color: #6D6E71;
-    margin: 15px 15px 20px 0px;
-    line-height: 16px;
-}
-
-#quality img {
-  vertical-align: top;
-  margin-right: 15px;
-}
-
-img {
-  width: 20px;
-}
-
-.delete-btn {
-  float: right;
-}
-
-.delete-btn:hover {
-  content: url(images/delete-hover.svg) no-repeat;
 }
 
 .idea-card {
   width: 35%;
   margin: auto;
+}
+
+#quality {
+  color: #6D6E71;
+  line-height: 16px;
+  margin: 15px 15px 20px 0px;
+}
+
+#quality img {
+  margin-right: 15px;
+  vertical-align: top;
+}
+
+
+
+/* Not sure what this is linking to...*/
+img {
+  width: 20px;
 }
