@@ -19,8 +19,17 @@ var ideaDiv = $('.idea-card');
 //Events
 $('.save').on('click', function(){
   var ideaCard = new newIdea(ideaHeader.val(), ideaCopy.val());
+
   var ideaHeaderNode = `<h3> ${ideaCard.title} </h3>`
+	var deleteBtnNode = `<img src="images/delete.svg" class="delete-btn" alt="Delete Button">`
   var ideaCopyNode = `<p> ${ideaCard.body} </p>`
-  ideaDiv.prepend(ideaHeaderNode, ideaCopyNode);
+	// var ideaQualityNode = `<p> ${ideaCard.quality} </p>`
+	var ideaHrNode = `<hr>`
+
+	$(function(){
+		$("p:first").addClass("body-text");
+	});
+
+  ideaDiv.prepend(ideaHeaderNode, deleteBtnNode, ideaCopyNode, /*ideaQualityNode,*/ ideaHrNode);
   ideaArray.push(ideaCard);
 })
