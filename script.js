@@ -8,8 +8,24 @@ var ideaDiv = $('.idea-card'); //article area for card info
 var ideaArray =[]; //our empty array to hold our idea objects; we should make it so it fetches what's already in our local storage first
 
 
-
 //Functions
+//Document ready state -- saving in local storage, need to append to DOM
+$(document).ready(function() {
+	loadIdeas();
+});
+
+function storeIdea() {
+	localStorage.setItem('ideaBoxArray', JSON.stringify(ideaArray)); //Sets the stringified array to the key 'IdeaBoxArray'
+}
+
+function loadIdeas() {
+	ideaArray = JSON.parse(localStorage.getItem('ideaBoxArray')) || [];
+		for (var i = 0; i < ideaArray.length; i++) {
+			ideaCardOutput(ideaArray[i]);
+		}
+};
+
+
 //Constructor Function
 	function newIdea(title, body) {
 		this.title=title;
@@ -51,6 +67,8 @@ var ideaArray =[]; //our empty array to hold our idea objects; we should make it
 		ideaArray.push(ideaCard);
 	  ideaDiv.prepend(ideaCardOutput(ideaCard));
 
+		storeIdea();
+
 		//text fields cleared after saving idea
 	}
 
@@ -64,7 +82,6 @@ var ideaArray =[]; //our empty array to hold our idea objects; we should make it
 				return 'genius';
 			}
 		}
-
 		//Tie the Quality value to unique ID of each card
 		//Swill ++ -> plausible
 		//Plausible ++ -> Genius
@@ -96,12 +113,13 @@ var ideaArray =[]; //our empty array to hold our idea objects; we should make it
 //Events
 $('.save').on('click', saveIdeaCard);
 $('body').on('click', '.delete-btn', function() {
-		console.log('delete')
+		console.log('delete');
 	});
 $('body').on('click', '.downvote-btn', function() {
-		console.log('downvote')
+		console.log('downvote');
 	});
 $('body').on('click', '.upvote-btn', function() {
-		console.log('upvote')
+		console.log('upvote');
 	});
+
 //Click event --> click text fields on card, target that text to edit; when user clicks title or body, text should become an editable field pre-populated with existing text; changes saved by clicking outside of text field or pressing enter/return key; edits reflected in storage
