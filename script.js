@@ -35,13 +35,15 @@ function newIdea(title, body) {
 
 function ideaCardOutput (newIdeaObject) {
 	$('.idea-card').prepend (
-		`<h3> ${newIdeaObject.title} </h3>
-	  <img class="delete-btn" height="20px" width="20px">
-	  <p class="body-text"> ${newIdeaObject.body}</p>
-	  <img class="upvote-btn" height="20px" width="20px">
-	  <img class="downvote-btn" height="20px" width="20px">
-	  <p id="quality">quality: <span class="quality-rating"> ${newIdeaObject.quality} </span></p>
-	  <hr>`);
+		`<article>
+			<h3> ${newIdeaObject.title} </h3>
+		  <img class="delete-btn" height="20px" width="20px">
+		  <p class="body-text"> ${newIdeaObject.body}</p>
+		  <img class="upvote-btn" height="20px" width="20px">
+		  <img class="downvote-btn" height="20px" width="20px">
+		  <p id="quality">quality: <span class="quality-rating"> ${newIdeaObject.quality} </span></p>
+		  <hr>
+		</article>`);
 	addClassStyling('p', "body-text");
 }
 
@@ -76,12 +78,13 @@ function downQuality(quality){
 		case 'plausible':
 			return 'swill';
 		case 'swill':
-			return 'swill';
+			return 'TEST';
 	}
 }
 
 function filterIdeaCard() {
 	// var filteredArray = ideaArray.filter(function(obj) {
+	//each thing in search bar evaluate to truthy
 	// As a user types in the search box, the list of ideas should filter in real time to only display ideas whose title or body include the user’s text. The page should not reload.
 	// Clearing the search box should restore all the ideas to the list.
 	// });
@@ -89,12 +92,16 @@ function filterIdeaCard() {
 // Loop through all list items, and hide those who don't match the search query
 //     for (i = 0; i < ideaArray.length; i++) {
 //         a = ...[i].getElementsByTagName("...")[0];
-//         if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+//         if (object.indexOf(filter -- OBJECT?) > -1) {
+//when the indexOf that object is greater than -1 it is a truthy value and it will pass
 //             ...[i].style.display = "";
 //         } else {
 //             ...[i].style.display = "none";
 //         }
 //     }
+//var filteredArray = ideaArray.filter(function(object) {
+  //return ideaArray.indexOf(object) > -1
+// include search string})
 // }
 
 
@@ -119,21 +126,19 @@ $('body').on('click', '.delete-btn', function() {
 });
 
 $('body').on('click', '.downvote-btn', function() {
-	ideaArray.forEach(function(object, index, array) {
-		var qualityText = $('.quality-rating')
-		console.log(object.quality);
-		object.quality = downQuality(object.quality);
-		qualityText.innerText = downQuality(object.quality);
+	var closestCard = (event.target.closest('article'));
+	var closestCardQualityElement = ($(this).siblings('#quality').children('.quality-rating'));
+	closestCardQualityElement[0].innerText = downQuality(closestCardQualityElement[0].innerText);
+	console.log(closestCardQualityElement[0].innerText);
 	});
-});
 
 
 $('body').on('click', '.upvote-btn', function() {
 	ideaArray.forEach(function(object, index, array) {
-		var qualityText = $('.quality-rating')
+		console.log(object.id);
 		console.log(object.quality);
 		object.quality = upQuality(object.quality);
-		qualityText.innerText = upQuality(object.quality);
+		$('.quality-rating').text(object.quality);
 	});
 });
 
