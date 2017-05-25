@@ -139,6 +139,12 @@ $('body').on('click', '.downvote-btn', function() {
 	console.log(closestCardQualityElement[0].innerText);
 	var id = event.target.closest('article').id;
 	console.log(id);
+	for (var i = 0; i < ideaArray.length; i++) {
+		if(ideaArray[i].id == id){
+			ideaArray[i].quality = closestCardQualityElement[0].innerText;
+		}
+	}
+	storeIdea();
 	});
 
 $('body').on('click', '.upvote-btn', function() {
@@ -146,6 +152,14 @@ $('body').on('click', '.upvote-btn', function() {
 	var closestCardQualityElement = ($(this).siblings('#quality').children('.quality-rating'));
 	closestCardQualityElement[0].innerText = upQuality(closestCardQualityElement[0].innerText);
 	console.log(closestCardQualityElement[0].innerText);
+	var id = event.target.closest('article').id;
+	console.log(id);
+	for (var i = 0; i < ideaArray.length; i++) {
+		if(ideaArray[i].id == id){
+			ideaArray[i].quality = closestCardQualityElement[0].innerText;
+		}
+	}
+	storeIdea();
 });
 
 //save the quality changes to the localStorage
