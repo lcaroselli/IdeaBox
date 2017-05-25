@@ -35,7 +35,7 @@ function newIdea(title, body) {
 
 function ideaCardOutput (newIdeaObject) {
 	$('.idea-card').prepend (
-		`<article>
+		`<article> ${newIdeaObject.id}
 			<h3> ${newIdeaObject.title} </h3>
 		  <img class="delete-btn" height="20px" width="20px">
 		  <p class="body-text"> ${newIdeaObject.body}</p>
@@ -133,6 +133,8 @@ $('body').on('click', '.downvote-btn', function() {
 	var closestCardQualityElement = ($(this).siblings('#quality').children('.quality-rating'));
 	closestCardQualityElement[0].innerText = downQuality(closestCardQualityElement[0].innerText);
 	console.log(closestCardQualityElement[0].innerText);
+	var id = event.target.closest('article').id;
+	console.log(id);
 	});
 
 $('body').on('click', '.upvote-btn', function() {
