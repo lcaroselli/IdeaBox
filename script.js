@@ -19,10 +19,10 @@ function storeIdea() {
 
 function loadIdeas() {
 	ideaArray = JSON.parse(localStorage.getItem('ideaBoxArray')) || [];
-		for (var i = 0; i < ideaArray.length; i++) {  //Refactor into foreach
-			ideaCardOutput(ideaArray[i]);
-		}
-};
+	ideaArray.forEach(function (object, index) {
+		ideaCardOutput(ideaArray[index]);
+	});
+}
 
 
 //Constructor Function
@@ -53,7 +53,6 @@ function saveIdeaCard() {
 	ideaArray.push(ideaCard);
 	ideaDiv.prepend(ideaCardOutput(ideaCard));
 	storeIdea();
-	//Persist the idea's quality as well
 }
 
 function upQuality(quality){
@@ -84,30 +83,6 @@ function downQuality(quality){
 	}
 }
 
-function filterIdeaCard() {
-	// var filteredArray = ideaArray.filter(function(obj) {
-	//each thing in search bar evaluate to truthy
-	// As a user types in the search box, the list of ideas should filter in real time to only display ideas whose title or body include the user’s text. The page should not reload.
-	// Clearing the search box should restore all the ideas to the list.
-	// });
-}
-// Loop through all list items, and hide those who don't match the search query
-//     for (i = 0; i < ideaArray.length; i++) {
-//         a = ...[i].getElementsByTagName("...")[0];
-//         if (object.indexOf(filter -- OBJECT?) > -1) {
-//when the indexOf that object is greater than -1 it is a truthy value and it will pass
-//             ...[i].style.display = "";
-//         } else {
-//             ...[i].style.display = "none";
-//         }
-//     }
-//var filteredArray = ideaArray.filter(function(object) {
-  //return ideaArray.indexOf(object) > -1
-// include search string})
-// }
-
-
-
 function resetForm() {
 	$('.title').val('');
 	$('.body').val('');
@@ -117,17 +92,15 @@ function resetForm() {
 
 //Events
 $('.search').on('keyup', function() {
-	//get value (string) from the search bar
 	var search = $(this).val().toLowerCase();
-	//compare that string to what is in our array
 	var myFilteredArray = ideaArray.filter(function(ideaObject) {
 		return ideaObject.body.toLowerCase().includes(search) || ideaObject.title.toLowerCase().includes(search);
-	})
+		})
 	$('.idea-card').empty();
-	for (var i = 0; i < myFilteredArray.length; i++) {  //Refactor into foreach
-		ideaCardOutput(myFilteredArray[i]);
+	myFilteredArray.forEach(function (object, index) {
+		ideaCardOutput(myFilteredArray[index]);
 	}
-	//only render cards that match the string in the search
+);
 });
 
 $('.save').on('click', function () {
@@ -152,9 +125,7 @@ $('body').on('click', '.downvote-btn', function() {
 	var closestCard = (event.target.closest('article'));
 	var closestCardQualityElement = ($(this).siblings('#quality').children('.quality-rating'));
 	closestCardQualityElement[0].innerText = downQuality(closestCardQualityElement[0].innerText);
-	console.log(closestCardQualityElement[0].innerText);
 	var id = event.target.closest('article').id;
-	console.log(id);
 	for (var i = 0; i < ideaArray.length; i++) {
 		if(ideaArray[i].id == id){
 			ideaArray[i].quality = closestCardQualityElement[0].innerText;
@@ -167,9 +138,7 @@ $('body').on('click', '.upvote-btn', function() {
 	var closestCard = (event.target.closest('article'));
 	var closestCardQualityElement = ($(this).siblings('#quality').children('.quality-rating'));
 	closestCardQualityElement[0].innerText = upQuality(closestCardQualityElement[0].innerText);
-	console.log(closestCardQualityElement[0].innerText);
 	var id = event.target.closest('article').id;
-	console.log(id);
 	for (var i = 0; i < ideaArray.length; i++) {
 		if(ideaArray[i].id == id){
 			ideaArray[i].quality = closestCardQualityElement[0].innerText;
@@ -177,5 +146,3 @@ $('body').on('click', '.upvote-btn', function() {
 	}
 	storeIdea();
 });
-
-//save the quality changes to the localStorage
