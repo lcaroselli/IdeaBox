@@ -36,9 +36,9 @@ function newIdea(title, body) {
 function ideaCardOutput (newIdeaObject) {
 	$('.idea-card').prepend (
 		`<article id="${newIdeaObject.id}">
-			<h3> ${newIdeaObject.title} </h3>
+			<h3 contenteditable> ${newIdeaObject.title} </h3>
 			<button class="delete-btn"></button>
-		  <p class="body-text"> ${newIdeaObject.body}</p>
+		  <p id="body" class="body-text" contenteditable> ${newIdeaObject.body}</p>
 		  <img class="upvote-btn" height="20px" width="20px">
 		  <img class="downvote-btn" height="20px" width="20px">
 		  <p id="quality" class="body-text">quality: <span class="quality-rating"> ${newIdeaObject.quality} </span></p>
@@ -142,6 +142,28 @@ $('body').on('click', '.upvote-btn', function() {
 	for (var i = 0; i < ideaArray.length; i++) {
 		if(ideaArray[i].id == id){
 			ideaArray[i].quality = closestCardQualityElement[0].innerText;
+		}
+	}
+	storeIdea();
+});
+
+$('body').on('blur', 'h3', function(e) {
+	var id = e.target.closest('article').id;
+	for (var i = 0; i < ideaArray.length; i++) {
+		if(ideaArray[i].id == id){
+			console.log(e.target.innerText);
+			ideaArray[i].title = e.target.innerText;
+		}
+	}
+	storeIdea();
+});
+
+$('body').on('blur', '#body', function(e) {
+	var id = e.target.closest('article').id;
+	for (var i = 0; i < ideaArray.length; i++) {
+		if(ideaArray[i].id == id){
+			console.log(e.target.innerText);
+			ideaArray[i].body = e.target.innerText;
 		}
 	}
 	storeIdea();
