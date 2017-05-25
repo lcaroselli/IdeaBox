@@ -1,6 +1,6 @@
 # Linked List by Laura Caroselli & Tyler Garner for Turing
 
-![ScreenShot of App](_ss.png?raw=true "ScreenShot of App")
+![ScreenShot of App](images/_ss.png?raw=true)
 
 ## Introduction
 
