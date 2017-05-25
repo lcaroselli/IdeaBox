@@ -106,6 +106,8 @@ function filterIdeaCard() {
 // include search string})
 // }
 
+
+
 function resetForm() {
 	$('.title').val('');
 	$('.body').val('');
@@ -114,6 +116,20 @@ function resetForm() {
 
 
 //Events
+$('.search').on('keyup', function() {
+	//get value (string) from the search bar
+	var search = $(this).val().toLowerCase();
+	//compare that string to what is in our array
+	var myFilteredArray = ideaArray.filter(function(ideaObject) {
+		return ideaObject.body.toLowerCase().includes(search) || ideaObject.title.toLowerCase().includes(search);
+	})
+	$('.idea-card').empty();
+	for (var i = 0; i < myFilteredArray.length; i++) {  //Refactor into foreach
+		ideaCardOutput(myFilteredArray[i]);
+	}
+	//only render cards that match the string in the search
+});
+
 $('.save').on('click', function () {
 	saveIdeaCard();
 	event.preventDefault();
