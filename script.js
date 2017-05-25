@@ -29,26 +29,22 @@ function loadIdeas() {
 function newIdea(title, body) {
 	this.title = title;
 	this.body = body;
-	this.id = Math.floor(Math.random() * 999999);
+	this.id = Date.now();
 	this.quality = 'swill';
 }
 
 function ideaCardOutput (newIdeaObject) {
 	$('.idea-card').prepend (
-		`<article>
+		`<article id="${newIdeaObject.id}">
 			<h3> ${newIdeaObject.title} </h3>
-		  <img class="delete-btn" height="20px" width="20px">
+			<button class="delete-btn"></button>
 		  <p class="body-text"> ${newIdeaObject.body}</p>
 		  <img class="upvote-btn" height="20px" width="20px">
 		  <img class="downvote-btn" height="20px" width="20px">
-		  <p id="quality">quality: <span class="quality-rating"> ${newIdeaObject.quality} </span></p>
+		  <p id="quality" class="body-text">quality: <span class="quality-rating"> ${newIdeaObject.quality} </span></p>
 		  <hr>
-		</article>`);
-	addClassStyling('p', "body-text");
-}
-
-function addClassStyling (element, className) {
-	$('element').addClass("className");
+		</article>`
+	);
 }
 
 function saveIdeaCard() {
@@ -122,7 +118,15 @@ $('.save').on('click', function () {
 });
 
 $('body').on('click', '.delete-btn', function() {
-	console.log('delete');
+	var closestCard = (event.target.closest('article'));
+	var id = event.target.closest('article').id
+	for (var i = 0; i < ideaArray.length; i++) {
+		if(ideaArray[i].id == id){
+			ideaArray.splice(i, 1)
+		}
+	}
+	storeIdea()
+	closestCard.remove()
 });
 
 $('body').on('click', '.downvote-btn', function() {
