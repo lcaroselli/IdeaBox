@@ -39,8 +39,8 @@ function ideaCardOutput (newIdeaObject) {
 			<h3 contenteditable> ${newIdeaObject.title} </h3>
 			<button class="delete-btn"></button>
 		  <p id="body" class="body-text" contenteditable> ${newIdeaObject.body}</p>
-		  <img class="upvote-btn" height="20px" width="20px">
-		  <img class="downvote-btn" height="20px" width="20px">
+		  <img class="upvote-btn"/>
+		  <img class="downvote-btn"/>
 		  <p id="quality" class="body-text">quality: <span class="quality-rating"> ${newIdeaObject.quality} </span></p>
 		  <hr>
 		</article>`
