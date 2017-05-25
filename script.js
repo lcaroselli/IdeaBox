@@ -60,10 +60,13 @@ function upQuality(quality){
 	switch (quality) {
 		case 'swill':
 	  	return 'plausible';
+			break;
 	  case 'plausible':
 	    return 'genius';
+			break;
 	  case 'genius':
 			return 'genius';
+			break;
 	}
 }
 
@@ -71,10 +74,13 @@ function downQuality(quality){
 	switch (quality) {
 		case 'genius':
 			return 'plausible';
+			break;
 		case 'plausible':
 			return 'swill';
+			break;
 		case 'swill':
-			return 'TEST';
+			return 'swill';
+			break;
 	}
 }
 
@@ -100,14 +106,11 @@ function filterIdeaCard() {
 // include search string})
 // }
 
-
-
 function resetForm() {
 	$('.title').val('');
 	$('.body').val('');
 	$('.title').focus();
 }
-
 
 
 //Events
@@ -134,21 +137,29 @@ $('body').on('click', '.downvote-btn', function() {
 	var closestCardQualityElement = ($(this).siblings('#quality').children('.quality-rating'));
 	closestCardQualityElement[0].innerText = downQuality(closestCardQualityElement[0].innerText);
 	console.log(closestCardQualityElement[0].innerText);
+	var id = event.target.closest('article').id;
+	console.log(id);
+	for (var i = 0; i < ideaArray.length; i++) {
+		if(ideaArray[i].id == id){
+			ideaArray[i].quality = closestCardQualityElement[0].innerText;
+		}
+	}
+	storeIdea();
 	});
-
 
 $('body').on('click', '.upvote-btn', function() {
-	ideaArray.forEach(function(object, index, array) {
-		console.log(object.id);
-		console.log(object.quality);
-		object.quality = upQuality(object.quality);
-		$('.quality-rating').text(object.quality);
-	});
+	var closestCard = (event.target.closest('article'));
+	var closestCardQualityElement = ($(this).siblings('#quality').children('.quality-rating'));
+	closestCardQualityElement[0].innerText = upQuality(closestCardQualityElement[0].innerText);
+	console.log(closestCardQualityElement[0].innerText);
+	var id = event.target.closest('article').id;
+	console.log(id);
+	for (var i = 0; i < ideaArray.length; i++) {
+		if(ideaArray[i].id == id){
+			ideaArray[i].quality = closestCardQualityElement[0].innerText;
+		}
+	}
+	storeIdea();
 });
 
-
-//foreach object in our array, grab the id a
-//Target the value (text) of that property
-//Change the value (text) of that property according to the downvote/upvote sequence
-//save the quality changes to the DOM and to the localStorage
-//
+//save the quality changes to the localStorage
